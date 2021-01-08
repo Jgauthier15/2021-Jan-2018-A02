@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ChinookSystem.BLL
 {
-    class Class1
+    class Dummy
     {
     }
 }

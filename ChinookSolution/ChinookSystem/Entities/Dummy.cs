@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ChinookSystem.Entities
 {
-    class Class1
+    class Dummy
     {
     }
 }
