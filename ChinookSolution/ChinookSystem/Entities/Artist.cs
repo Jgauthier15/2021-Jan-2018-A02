@@ -17,7 +17,7 @@ namespace ChinookSystem.Entities
         private string _Name;
 
        [Key]
-        public int AristId { get; set; }
+        public int ArtistId { get; set; }
 
 
         //Annotational Validation for Name

@@ -36,7 +36,7 @@ namespace ChinookSystem.Entities
         public int? Bytes { get; set; }
         [Required(ErrorMessage = "You must have a Unit Price.")]
         public decimal UnitPrice { get; set; }
-.
+
 
         //one to many direction (parent to child)
         public virtual Album Album { get; set; }
