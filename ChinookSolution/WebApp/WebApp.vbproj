@@ -335,6 +335,7 @@
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
+    <Content Include="WebConnectionStrings.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account\AddPhoneNumber.aspx.designer.vb">
