@@ -54,7 +54,8 @@
   <ItemGroup>
     <Compile Include="BLL\Dummy.cs" />
     <Compile Include="DAL\Dummy.cs" />
-    <Compile Include="Entities\Dummy.cs" />
+    <Compile Include="Entities\Album.cs" />
+    <Compile Include="Entities\Artist.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Dummy.cs" />
   </ItemGroup>

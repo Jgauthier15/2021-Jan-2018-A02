@@ -29,5 +29,9 @@ namespace ChinookSystem.Entities
             get { return _Name; }
             set { _Name = string.IsNullOrEmpty(value) ? null : value; }
         }
+
+        //navigational property
+        //one to many direction (parent to child)
+        public virtual ICollection<Album> Albums { get; set; }
     }
 }
