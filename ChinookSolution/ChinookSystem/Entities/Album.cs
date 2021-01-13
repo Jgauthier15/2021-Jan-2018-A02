@@ -40,9 +40,13 @@ namespace ChinookSystem.Entities
 
         //[NotMapped] annotations are also allowed
 
+
         //Navigational Properties
         //many to one direction (child to parent)
         public virtual Artist Artist { get; set; }
+
+        //one to many direction (parent to child)
+        public virtual ICollection<Track> Tracks { get; set; }
 
     }
 }
