@@ -18,25 +18,34 @@ namespace ChinookSystem.Entities
 
         public int TrackId { get; set; }
 
-        [Required(ErrorMessage ="The Track requires a title.")]
-        [StringLength(200, ErrorMessage ="The Track Name cannot be longer than 200 characters")]
+        [Required(ErrorMessage = "The Track requires a title.")]
+        [StringLength(200, ErrorMessage = "The Track Name cannot be longer than 200 characters", MinimumLength = 1)]
         public string Name { get; set; }
 
-        public int AlbumId { get; set; }
+        public int? AlbumId { get; set; }
         public int MediaTypeId { get; set; }
-        public int GenreId { get; set; }
+        public int? GenreId { get; set; }
+
+        [StringLength(220, ErrorMessage = "Track composer is limited to 220 characters.")]
         public string Composer
         {
             get { return _Composer; }
             set { _Composer = string.IsNullOrEmpty(value) ? null : value; }
         }
         public int Milliseconds { get; set; }
-        public int Bytes { get; set; }
+        public int? Bytes { get; set; }
+        [Required(ErrorMessage = "You must have a Unit Price.")]
         public decimal UnitPrice { get; set; }
 
 
         //one to many direction (parent to child)
-        public virtual Album Tracks { get; set; }
+        public virtual Album Album { get; set; }
+        public virtual Genre Genre {get; set;}
+        public virtual MediaType MediaType { get; set; }
+
+        //many to one direction (child to parent)
+
+        public virtual ICollection<PlaylistTrack> PlaylistTrack { get; set; }
 
     }
 }
