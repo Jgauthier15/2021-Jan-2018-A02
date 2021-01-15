@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-#region Additional Namespaces
+#region Additional Namespace
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 #endregion
+
 
 namespace ChinookSystem.Entities
 {
@@ -15,23 +16,19 @@ namespace ChinookSystem.Entities
     internal class Album
     {
         private string _ReleaseLabel;
+
         [Key]
         public int AlbumId { get; set; }
 
-        //title is required
-        [Required(ErrorMessage ="Album Title is required.")]
-        [StringLength(160, ErrorMessage = "Album Title is limited to 160 characters.")]
+        [Required(ErrorMessage ="Album title is required ")]
+        [StringLength(160, ErrorMessage = "Album title is limited to 160 characters.")]
         public string Title { get; set; }
 
-        //while AristId is required, it is a FK and does not require the [Required] annotation field.
-        //The default value for year/boolean have a value. Strings default to null. That's why you [Required] for strings and not ints.
         public int ArtistId { get; set; }
 
         public int ReleaseYear { get; set; }
 
-        [StringLength(50, ErrorMessage = "Release Release Label is limited to 50 characters.")]
-
-        //ReleaseLabel can be nullable, so let's fully implement it. (private string _ReleaseLabel )
+        [StringLength(50, ErrorMessage = "Album release label is limited to 50 characters.")]
         public string ReleaseLabel
         {
             get { return _ReleaseLabel; }
@@ -40,13 +37,11 @@ namespace ChinookSystem.Entities
 
         //[NotMapped] annotations are also allowed
 
-
-        //Navigational Properties
-        //many to one direction (child to parent)
+        //navigational properties
+        //many to one direction child to parent
         public virtual Artist Artist { get; set; }
 
-        //one to many direction (parent to child)
+        //one to many direction parent to child
         public virtual ICollection<Track> Tracks { get; set; }
-
     }
 }

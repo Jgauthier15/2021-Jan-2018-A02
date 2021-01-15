@@ -8,12 +8,10 @@ namespace ChinookSystem.ViewModels
 {
     public class SelectionList
     {
-        //  value field of the instance
+        // value field of the instance
         public int ValueField { get; set; }
         
-        //  display field of the instance
+        // display field of the instance
         public string DisplayField { get; set; }
-
-
     }
 }

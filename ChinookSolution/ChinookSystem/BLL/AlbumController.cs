@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 #region Additional Namespaces
 using ChinookSystem.DAL;
-using ChinookSystem.Entities;       //for sql and are internal
-using ChinookSystem.ViewModels;     //for data classes to transfer data from BLL to WebApp
-using System.ComponentModel;        //for ODS Wizard
+using ChinookSystem.Entities;   //for Sql and are internal
+using ChinookSystem.ViewModels; //for data class to transfer data from BLL to web app
+using System.ComponentModel;    //for ODS wizard
 #endregion
 
 namespace ChinookSystem.BLL
@@ -19,7 +19,7 @@ namespace ChinookSystem.BLL
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<ArtistAlbums> Albums_GetArtistAlbums()
         {
-            using (var context = new ChinookSystemContext())
+            using(var context = new ChinookSystemContext())
             {
                 IEnumerable<ArtistAlbums> results = from x in context.Albums
                                                     select new ArtistAlbums
@@ -31,19 +31,20 @@ namespace ChinookSystem.BLL
                 return results.ToList();
             }
         }
+
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<ArtistAlbums> Albums_GetAlbumsForArtist(int artistid)
         {
             using (var context = new ChinookSystemContext())
             {
                 IEnumerable<ArtistAlbums> results = from x in context.Albums
-                                                    where x.ArtistId==artistid
+                                                    where x.ArtistId == artistid
                                                     select new ArtistAlbums
                                                     {
                                                         Title = x.Title,
                                                         ReleaseYear = x.ReleaseYear,
                                                         ArtistName = x.Artist.Name,
-                                                        ArtistId=x.ArtistId
+                                                        ArtistId = x.ArtistId
                                                     };
                 return results.ToList();
             }

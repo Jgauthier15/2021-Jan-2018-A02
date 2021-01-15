@@ -1,22 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 #region Additional Namespaces
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using System.Data.Entity;
 using ChinookSystem.Entities;
+using System.Data.Entity;
 #endregion
-
 
 namespace ChinookSystem.DAL
 {
     internal class ChinookSystemContext:DbContext
     {
-        public ChinookSystemContext() : base("name=ChinookDB")
+        public ChinookSystemContext():base("name=ChinookDB")
         {
 
         }

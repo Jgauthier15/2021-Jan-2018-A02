@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 #region Additional Namespaces
 using ChinookSystem.DAL;
-using ChinookSystem.Entities;       //for sql and are internal
-using ChinookSystem.ViewModels;     //for data classes to transfer data from BLL to WebApp
-using System.ComponentModel;        //for ODS Wizard
+using ChinookSystem.Entities;   //for Sql and are internal
+using ChinookSystem.ViewModels; //for data class to transfer data from BLL to web app
+using System.ComponentModel;    //for ODS wizard
 #endregion
 
 namespace ChinookSystem.BLL
@@ -17,9 +17,9 @@ namespace ChinookSystem.BLL
     public class ArtistController
     {
         [DataObjectMethod(DataObjectMethodType.Select,false)]
-        public List<SelectionList> Artist_DDLList()
+        public List<SelectionList> Artists_DDLList()
         {
-            using (var context = new ChinookSystemContext())
+            using(var context = new ChinookSystemContext())
             {
                 IEnumerable<SelectionList> results = from x in context.Artists
                                                      select new SelectionList
@@ -27,7 +27,7 @@ namespace ChinookSystem.BLL
                                                          ValueField = x.ArtistId,
                                                          DisplayField = x.Name
                                                      };
-            return results.ToList();
+                return results.ToList();
             }
         }
     }

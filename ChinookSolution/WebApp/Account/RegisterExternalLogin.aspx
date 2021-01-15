@@ -1,6 +1,5 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="RegisterExternalLogin.aspx.vb" Inherits="WebApp.RegisterExternalLogin" Async="true" %>
+﻿<%@ Page Title="Register an external login" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="RegisterExternalLogin.aspx.cs" Inherits="WebApp.Account.RegisterExternalLogin" Async="true" %>
 
-<%@ Import Namespace="WebApp" %>
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
 <h3>Register with your <%: ProviderName %> account</h3>
 

@@ -17,16 +17,18 @@ namespace ChinookSystem.Entities
         private string _Name;
 
         [Key]
-        public int GenreID { get; set; }
+        public int GenreId { get; set; }
 
+        //[Required(ErrorMessage = "Artist name is required.")]
+        [StringLength(120, ErrorMessage = "Genre name is limited to 120 characters.")]
         public string Name
         {
             get { return _Name; }
             set { _Name = string.IsNullOrEmpty(value) ? null : value; }
         }
 
-
-        //one to many direction (parent to child)
+        //navigational properties
+        // 1 to many relationship; create the many relationship in this entity
         public virtual ICollection<Track> Tracks { get; set; }
     }
 }
