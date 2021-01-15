@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace ChinookSystem.ViewModels
 {
-    class SelectionList
+    public class SelectionList
     {
+        //  value field of the instance
+        public int ValueField { get; set; }
+        
+        //  display field of the instance
+        public string DisplayField { get; set; }
+
+
     }
 }
