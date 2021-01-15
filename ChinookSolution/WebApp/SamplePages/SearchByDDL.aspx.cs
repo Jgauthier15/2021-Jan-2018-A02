@@ -16,6 +16,7 @@ namespace WebApp.SamplePages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            Message.Text = "";
             if(!Page.IsPostBack)
             {
                 //this is first time
@@ -44,7 +45,22 @@ namespace WebApp.SamplePages
 
         protected void SearchAlbums_Click(object sender, EventArgs e)
         {
-
+            if(ArtistList.SelectedIndex == 0)
+            {
+                //index 0 is physically pointing to the prompt line
+                Message.Text = "Select an artist for the search.";
+                ArtistAlbumList.DataSource = null;
+                ArtistAlbumList.DataBind();
+            }
+            else
+            {
+                //standard look and assignment
+                AlbumController sysmgr = new AlbumController();
+                List<ChinookSystem.ViewModels.ArtistAlbums> info = sysmgr.Albums_GetAlbumsForArtist(
+                    int.Parse(ArtistList.SelectedValue));
+                ArtistAlbumList.DataSource = info;
+                ArtistAlbumList.DataBind();
+            }
         }
     }
 }
