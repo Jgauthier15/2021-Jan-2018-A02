@@ -72,6 +72,7 @@
     <Compile Include="Entities\PlaylistTrack.cs" />
     <Compile Include="Entities\Track.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\AlbumItem.cs" />
     <Compile Include="ViewModels\ArtistAlbums.cs" />
     <Compile Include="ViewModels\SelectionList.cs" />
   </ItemGroup>

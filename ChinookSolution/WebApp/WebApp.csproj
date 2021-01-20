@@ -197,6 +197,7 @@
     <Content Include="Account\Web.config" />
     <Content Include="SamplePages\ArtistAlbums.aspx" />
     <Content Include="SamplePages\SearchByDDL.aspx" />
+    <Content Include="SamplePages\ListViewODSCRUD.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -488,6 +489,13 @@
     </Compile>
     <Compile Include="SamplePages\TestPage.aspx.designer.cs">
       <DependentUpon>TestPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SamplePages\ListViewODSCRUD.aspx.cs">
+      <DependentUpon>ListViewODSCRUD.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SamplePages\ListViewODSCRUD.aspx.designer.cs">
+      <DependentUpon>ListViewODSCRUD.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
