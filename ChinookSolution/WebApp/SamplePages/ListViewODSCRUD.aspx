@@ -1,4 +1,7 @@
 ﻿<%@ Page Title="ListView ODS CRUD" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ListViewODSCRUD.aspx.cs" Inherits="WebApp.SamplePages.WebForm1" %>
+
+<%@ Register Src="~/UserControls/MessageUserControl.ascx" TagPrefix="uc1" TagName="MessageUserControl" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <h1>Single Record CRUD using ODS: ListView</h1>
     <div class="row">
@@ -10,6 +13,17 @@
                 This sample will use the course MessageUserControl for error handling<br />
                 This sample will use validation on the ListView control
             </blockquote>
+        </div>
+    </div>
+    <div class="row">
+        <div class="offset-2">
+            <uc1:MessageUserControl runat="server" ID="MessageUserControl" />
+            <asp:ValidationSummary ID="ValidationSummaryEdit" runat="server" 
+                 HeaderText="Following are concerns with your data while editing."
+                 ValidationGroup="egroup"/>
+            <asp:ValidationSummary ID="ValidationSummaryInsert" runat="server" 
+                HeaderText="Following are concerns with your data while inserting."
+                 ValidationGroup="igroup"/>
         </div>
     </div>
     <div class="row">
@@ -52,17 +66,34 @@
                         <asp:Label Text='<%# Eval("ReleaseLabel") %>' runat="server" ID="ReleaseLabelLabel" /></td>
                 </tr>
             </AlternatingItemTemplate>
+
             <EditItemTemplate>
+                <%-- Validation controls will be placed inside the associated template
+                     The ID of the validated control needs to be unique
+                     The validation controls for a particular Template needs to be GROUPED *****
+                    
+                    The validation excutes ONLY on the use of the template where the group is tied to the Button.--%>
+                <asp:RequiredFieldValidator ID="RequiredTitleE" runat="server" 
+                    ErrorMessage="Album title is required when editing."
+                    ControlToValidate="TitleTextBoxE" Display="None"
+                    ValidationGroup="egroup">
+                </asp:RequiredFieldValidator>
                 <tr style="background-color: #999999;">
                     <td>
-                        <asp:Button runat="server" CommandName="Update" Text="Update" ID="UpdateButton" />
-                        <asp:Button runat="server" CommandName="Cancel" Text="Cancel" ID="CancelButton" />
+                        <%-- Tie the button to the appropriate validation group (ie:egroup)
+                            FAILURE to tie the button to the appropriate group will causse ALL validation on the page to execute.--%>
+                        <asp:Button runat="server" CommandName="Update" 
+                            Text="Update" ID="UpdateButton" 
+                            ValidationGroup ="egroup"/>
+
+                        <asp:Button runat="server" CommandName="Cancel" 
+                            Text="Cancel" ID="CancelButton" />
                     </td>
                     <td>
                         <asp:TextBox Text='<%# Bind("AlbumId") %>' runat="server" ID="AlbumIdTextBox"
                             Width="50px" Enabled="false" /></td>
                     <td>
-                        <asp:TextBox Text='<%# Bind("Title") %>' runat="server" ID="TitleTextBox" /></td>
+                        <asp:TextBox Text='<%# Bind("Title") %>' runat="server" ID="TitleTextBoxE" /></td>
                     <td>
                         <asp:DropDownList ID="ArtistList" runat="server" 
                             DataSourceID="ArtistListODS" 
@@ -87,16 +118,23 @@
                 </table>
             </EmptyDataTemplate>
             <InsertItemTemplate>
+                <asp:RequiredFieldValidator ID="RequiredTitleI" runat="server" 
+                    ErrorMessage="Album title is required when inserting."
+                    ControlToValidate="TitleTextBoxI" Display="None"
+                    ValidationGroup="igroup">
+                </asp:RequiredFieldValidator>
                 <tr style="">
                     <td>
-                        <asp:Button runat="server" CommandName="Insert" Text="Insert" ID="InsertButton" />
+                        <asp:Button runat="server" CommandName="Insert" 
+                            Text="Insert" ID="InsertButton"
+                            ValidationGroup="igroup" Display="none"/>
                         <asp:Button runat="server" CommandName="Cancel" Text="Clear" ID="CancelButton" />
                     </td>
                     <td>
                         <asp:TextBox Text='<%# Bind("AlbumId") %>' runat="server" ID="AlbumIdTextBox" 
                             Width="50px"/></td>
                     <td>
-                        <asp:TextBox Text='<%# Bind("Title") %>' runat="server" ID="TitleTextBox" /></td>
+                        <asp:TextBox Text='<%# Bind("Title") %>' runat="server" ID="TitleTextBoxI" /></td>
                     <td>
                         <asp:DropDownList ID="ArtistList" runat="server" 
                             DataSourceID="ArtistListODS" 
@@ -199,18 +237,26 @@
 
         <asp:ObjectDataSource ID="AlbumListODS" runat="server" 
             OldValuesParameterFormatString="original_{0}" 
-            SelectMethod="Albums_List" 
+
             TypeName="ChinookSystem.BLL.AlbumController" 
             DataObjectTypeName="ChinookSystem.ViewModels.AlbumItem" 
-            DeleteMethod="Album_Delete" 
-            InsertMethod="Album_Add" 
-            UpdateMethod="Album_Update">
+            DeleteMethod="Album_Delete"
+             OnDeleted="DeleteCheckForException"
+            InsertMethod="Album_Add"
+             OnInserted="InsertCheckForException"
+            SelectMethod="Albums_List" 
+             OnSelected="SelectCheckForException"
+            UpdateMethod="Album_Update"
+             OnUpdated="UpdateCheckForException">
+             
+            
 
         </asp:ObjectDataSource>
 
         <asp:ObjectDataSource ID="ArtistListODS" runat="server" 
             OldValuesParameterFormatString="original_{0}" 
-            SelectMethod="Artists_DDLList" 
+            SelectMethod="Artists_DDLList"
+             OnSelected="SelectCheckForException"
             TypeName="ChinookSystem.BLL.ArtistController">
         </asp:ObjectDataSource>
         </div>
