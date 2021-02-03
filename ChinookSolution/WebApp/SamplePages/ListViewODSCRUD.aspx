@@ -117,6 +117,7 @@
                     </tr>
                 </table>
             </EmptyDataTemplate>
+
             <InsertItemTemplate>
                 <asp:RequiredFieldValidator ID="RequiredTitleI" runat="server" 
                     ErrorMessage="Album title is required when inserting."
@@ -151,6 +152,8 @@
                         <asp:TextBox Text='<%# Bind("ReleaseLabel") %>' runat="server" ID="ReleaseLabelTextBox" /></td>
                 </tr>
             </InsertItemTemplate>
+
+
             <ItemTemplate>
                 <tr style="background-color: #E0FFFF; color: #333333;">
                     <td>
