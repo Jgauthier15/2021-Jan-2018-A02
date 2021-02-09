@@ -196,6 +196,7 @@
     <Content Include="Global.asax" />
     <Content Include="Account\Web.config" />
     <Content Include="SamplePages\ArtistAlbums.aspx" />
+    <Content Include="SamplePages\ODSRepeater.aspx" />
     <Content Include="SamplePages\SearchByDDL.aspx" />
     <Content Include="SamplePages\ListViewODSCRUD.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -475,6 +476,13 @@
     </Compile>
     <Compile Include="SamplePages\ArtistAlbums.aspx.designer.cs">
       <DependentUpon>ArtistAlbums.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SamplePages\ODSRepeater.aspx.cs">
+      <DependentUpon>ODSRepeater.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SamplePages\ODSRepeater.aspx.designer.cs">
+      <DependentUpon>ODSRepeater.aspx</DependentUpon>
     </Compile>
     <Compile Include="SamplePages\SearchByDDL.aspx.cs">
       <DependentUpon>SearchByDDL.aspx</DependentUpon>
