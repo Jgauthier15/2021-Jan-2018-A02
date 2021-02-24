@@ -61,6 +61,9 @@
     <Compile Include="BLL\ArtistController.cs" />
     <Compile Include="BLL\CustomerController.cs" />
     <Compile Include="BLL\EmployeeController.cs" />
+    <Compile Include="BLL\GenreController.cs" />
+    <Compile Include="BLL\PlaylistTracksController.cs" />
+    <Compile Include="BLL\TrackController.cs" />
     <Compile Include="Entities\Album.cs" />
     <Compile Include="Entities\Artist.cs" />
     <Compile Include="DAL\ChinookSystemContext.cs" />
@@ -80,6 +83,8 @@
     <Compile Include="ViewModels\CustomerSupportItem.cs" />
     <Compile Include="ViewModels\EmployeeCustomerList.cs" />
     <Compile Include="ViewModels\SelectionList.cs" />
+    <Compile Include="ViewModels\TrackList.cs" />
+    <Compile Include="ViewModels\UserPlaylistTrack.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
