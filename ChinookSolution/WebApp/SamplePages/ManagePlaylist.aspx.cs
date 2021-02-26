@@ -31,10 +31,22 @@ namespace WebApp.SamplePages
 
         protected void ArtistFetch_Click(object sender, EventArgs e)
         {
+            TracksBy.Text = "Artist";
             
-                //code to go here
-
-          }
+            if (string.IsNullOrEmpty(ArtistName.Text))
+            {
+                MessageUserControl.ShowInfo("You did not supply an Artist Name.");
+                SearchArg.Value = "asdzxc";
+            }
+            else
+            {
+                //the HiddenField content access is .Value  NOT   .Text
+                SearchArg.Value = ArtistName.Text;
+            }
+            //to force the re-execution of an ODS attached to a display control
+            //      rebind the display control
+            TracksSelectionList.DataBind();
+        }
 
 
         protected void GenreFetch_Click(object sender, EventArgs e)
