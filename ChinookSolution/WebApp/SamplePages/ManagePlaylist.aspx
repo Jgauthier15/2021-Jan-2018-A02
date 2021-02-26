@@ -28,6 +28,7 @@
         <asp:Button ID="ArtistFetch" runat="server" Text="Fetch" 
             OnClick="ArtistFetch_Click"/>
         <br /><br />
+
          <asp:Label ID="Label3" runat="server" Text="Genre"></asp:Label><br />
         <asp:DropDownList ID="GenreDDL" runat="server"
             Width="150px" DataSourceID="GenreDDLODS" 
@@ -37,6 +38,7 @@
         <asp:Button ID="GenreFetch" runat="server" Text="Fetch" OnClick="GenreFetch_Click" 
             />
         <br /><br />
+
          <asp:Label ID="Label4" runat="server" Text="Album"></asp:Label><br />
         <asp:TextBox ID="AlbumTitle" runat="server"
             Width="150px" placeholder="album title">
@@ -44,6 +46,7 @@
         <asp:Button ID="AlbumFetch" runat="server" Text="Fetch" OnClick="AlbumFetch_Click"
              />
         <br /><br />
+
     </div>
     <div class="col-sm-9">
         <asp:Label ID="Label5" runat="server" Text="Tracks"></asp:Label>&nbsp;&nbsp;
