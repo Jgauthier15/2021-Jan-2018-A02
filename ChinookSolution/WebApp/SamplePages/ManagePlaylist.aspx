@@ -51,7 +51,7 @@
     <div class="col-sm-9">
         <asp:Label ID="Label5" runat="server" Text="Tracks"></asp:Label>&nbsp;&nbsp;
         <asp:Label ID="TracksBy" runat="server" ></asp:Label>&nbsp;&nbsp;
-        <asp:HiddenField ID="SearchArg" runat="server" Visible="true" /><br />
+        <asp:HiddenField ID="SearchArg" runat="server"/><br />
         <asp:ListView ID="TracksSelectionList" runat="server"
             OnItemCommand="TracksSelectionList_ItemCommand"
             DataSourceID="TrackSelectionListODS">
