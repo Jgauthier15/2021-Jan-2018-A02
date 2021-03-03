@@ -60,7 +60,7 @@
                     <td>
                         <asp:LinkButton ID="AddtoPlaylist" runat="server"
                              CssClass="btn" CommandArgument='<%# Eval("TrackID") %>'>
-                            <span aria-hidden="true" class="glyphicon glyphicon-plus">&nbsp;</span>
+                            <i class="fa fa-plus" style="color:red; font-size:2em;"></i>&nbsp;
                         </asp:LinkButton>
                         </td>
                     <td>
@@ -95,7 +95,7 @@
                     <td>
                        <asp:LinkButton ID="AddtoPlaylist" runat="server"
                              CssClass="btn" CommandArgument='<%# Eval("TrackID") %>'>
-                            <span aria-hidden="true" class="glyphicon glyphicon-plus">&nbsp;</span>
+                            <i class="fa fa-plus" style="color:red; font-size:2em;"></i>&nbsp;
                         </asp:LinkButton>
                     </td>
                     <td>
