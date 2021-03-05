@@ -119,14 +119,19 @@ namespace WebApp.SamplePages
                 //   }[,"Message Title","Success Message"]);    ( [] = optional  )
                 MessageUserControl.TryRun(() => {
                     PlaylistTracksController sysmgr = new PlaylistTracksController();
-                    List<UserPlaylistTrack> info = sysmgr.List_TracksForPlaylist(PlaylistName.Text, username);
-                    PlayList.DataSource = info;
-                    PlayList.DataBind();
+                    RefreshPlayList(sysmgr, username);
                 },"Playlist Search","View the requested playlist below.");
 
 
             }
 
+        }
+        protected void RefreshPlayList(PlaylistTracksController sysmgr, string username)
+        {
+
+            List<UserPlaylistTrack> info = sysmgr.List_TracksForPlaylist(PlaylistName.Text, username);
+            PlayList.DataSource = info;
+            PlayList.DataBind();
         }
 
         protected void MoveDown_Click(object sender, EventArgs e)
@@ -157,7 +162,27 @@ namespace WebApp.SamplePages
         protected void TracksSelectionList_ItemCommand(object sender,
             ListViewCommandEventArgs e)
         {
-            //code to go here
+            string username = "HansenB";  //until security is implemented
+
+            //form event validation: presence (do i have data?)
+            if(string.IsNullOrEmpty(PlaylistName.Text))
+            {
+                MessageUserControl.ShowInfo("Missing Data", "Enter a playlist name");
+            }
+            else
+            {
+                //Reminder: MessageUserControl will do the error handling
+                MessageUserControl.TryRun(() => {
+                    //logic for your coding block
+                    PlaylistTracksController sysmgr = new PlaylistTracksController();
+                    //access a specific field on the selected ListView row.
+                    string song = (e.Item.FindControl("NameLabel") as Label).Text;
+
+                    sysmgr.Add_TrackToPLaylist(PlaylistName.Text, username, int.Parse(e.CommandArgument.ToString()),song);
+
+
+                },"Add Track to Playlist","Track has been added to the playlist.");
+            }
 
         }
 
