@@ -64,13 +64,13 @@ namespace WebApp.SamplePages
             // / / / /WARNING: Using the display field for the local, in this example, is possible because
             //                  EACH description is unique!!!!!
             SearchArg.Value = GenreDDL.SelectedItem.Text;
-            
+
             //to force the re-execution of an ODS attached to a display control
             //      rebind the display control
             TracksSelectionList.DataBind();
         }
 
-    
+
 
         protected void AlbumFetch_Click(object sender, EventArgs e)
         {
@@ -117,10 +117,11 @@ namespace WebApp.SamplePages
                 //      your coding logic
                 //
                 //   }[,"Message Title","Success Message"]);    ( [] = optional  )
-                MessageUserControl.TryRun(() => {
+                MessageUserControl.TryRun(() =>
+                {
                     PlaylistTracksController sysmgr = new PlaylistTracksController();
                     RefreshPlayList(sysmgr, username);
-                },"Playlist Search","View the requested playlist below.");
+                }, "Playlist Search", "View the requested playlist below.");
 
 
             }
@@ -155,7 +156,56 @@ namespace WebApp.SamplePages
 
         protected void DeleteTrack_Click(object sender, EventArgs e)
         {
-            //code to go here
+            string username = "HansenB";  //until security is implemented
+
+            //form event validation: presence (do i have data?)
+            if (string.IsNullOrEmpty(PlaylistName.Text))
+            {
+                MessageUserControl.ShowInfo("Missing Data", "Enter a playlist name");
+            }
+            else
+            {
+                if (PlayList.Rows.Count == 0)
+                {
+                    MessageUserControl.ShowInfo("Track Removal", "You must have a play list visible to choose removals. Select fromt he displayed playlist.");
+                }
+                else
+                {
+                    //collect the tracks indicated on the playlist for removal
+                    List<int> trackids = new List<int>();
+                    int rowsSelected = 0;
+                    CheckBox trackSelection = null;
+                    //traverse the gridview control PlayList
+                    //you could do this same code using a foreach()
+                    for (int i = 0; i < PlayList.Rows.Count; i++)
+                    {
+                        //point to the checkbox control on the gridview row
+                        trackSelection = PlayList.Rows[i].FindControl("Selected") as CheckBox;
+                        //test the setting of the checkbox
+                        if (trackSelection.Checked)
+                        {
+                            rowsSelected++;
+                            trackids.Add(int.Parse((PlayList.Rows[i].FindControl("TrackId") as Label).Text));
+                        }
+                    }
+
+                    //was a song selected?
+                    if (rowsSelected == 0)
+                    {
+                        MessageUserControl.ShowInfo("Missing Data", "You must select at least one song to remove.");
+                    }
+                    else
+                    {
+                        //data collected, send for processing
+                        MessageUserControl.TryRun(() =>
+                        {
+                            PlaylistTracksController sysmgr = new PlaylistTracksController();
+                            sysmgr.DeleteTracks(username, PlaylistName.Text, trackids);
+                            RefreshPlayList(sysmgr, username);
+                        }, "Track removal", "Selected track(s) have been removed from the playlist");
+                    }
+                }
+            }
 
         }
 
@@ -165,26 +215,26 @@ namespace WebApp.SamplePages
             string username = "HansenB";  //until security is implemented
 
             //form event validation: presence (do i have data?)
-            if(string.IsNullOrEmpty(PlaylistName.Text))
+            if (string.IsNullOrEmpty(PlaylistName.Text))
             {
                 MessageUserControl.ShowInfo("Missing Data", "Enter a playlist name");
             }
             else
             {
                 //Reminder: MessageUserControl will do the error handling
-                MessageUserControl.TryRun(() => {
+                MessageUserControl.TryRun(() =>
+                {
                     //logic for your coding block
                     PlaylistTracksController sysmgr = new PlaylistTracksController();
                     //access a specific field on the selected ListView row.
                     string song = (e.Item.FindControl("NameLabel") as Label).Text;
 
-                    sysmgr.Add_TrackToPLaylist(PlaylistName.Text, username, int.Parse(e.CommandArgument.ToString()),song);
+                    sysmgr.Add_TrackToPLaylist(PlaylistName.Text, username, int.Parse(e.CommandArgument.ToString()), song);
+                    RefreshPlayList(sysmgr, username);
 
 
-                },"Add Track to Playlist","Track has been added to the playlist.");
+                }, "Add Track to Playlist", "Track has been added to the playlist.");
             }
-
         }
-
     }
 }
