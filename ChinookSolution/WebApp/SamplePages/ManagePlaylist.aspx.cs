@@ -137,19 +137,153 @@ namespace WebApp.SamplePages
 
         protected void MoveDown_Click(object sender, EventArgs e)
         {
-            //code to go here
+            //form event validation: presence (do i have data?)
+            if (string.IsNullOrEmpty(PlaylistName.Text))
+            {
+                MessageUserControl.ShowInfo("Missing Data", "Enter a playlist name");
+            }
+            else
+            {
+                if (PlayList.Rows.Count == 0)
+                {
+                    MessageUserControl.ShowInfo("Track Movement", "You must have a play list visible to choose tracks for movement. Select fromt he displayed playlist.");
+                }
+                else
+                {
+                    MoveTrackItem moveTrack = new MoveTrackItem();
+                    int rowsSelected = 0;
+                    CheckBox trackSelection = null;
+                    //traverse the gridview control PlayList
+                    //you could do this same code using a foreach()
+                    for (int i = 0; i < PlayList.Rows.Count; i++)
+                    {
+                        //point to the checkbox control on the gridview row
+                        trackSelection = PlayList.Rows[i].FindControl("Selected") as CheckBox;
+                        //test the setting of the checkbox
+                        if (trackSelection.Checked)
+                        {
+                            rowsSelected++;
+                            moveTrack.TrackID = int.Parse((trackSelection.FindControl("TrackId") as Label).Text);
+                            moveTrack.TrackNumber = int.Parse((trackSelection.FindControl("TrackNumber") as Label).Text);
+                        }
+                    }
+
+                    //was a single song selected?
+                    switch (rowsSelected)
+                    {
+                        case 0:
+                            {
+                                MessageUserControl.ShowInfo("Track Movement", "You must select one song to remove.");
+                                break;
+                            }
+                        case 1:
+                            {
+                                //rule: do not move if last song
+                                if (moveTrack.TrackNumber==PlayList.Rows.Count)
+                                {
+                                    MessageUserControl.ShowInfo("Track Movement", "Song selected is already the last song. Moving down not necessary.");
+                                }
+                                else
+                                {
+                                    moveTrack.Direction = "down";
+                                    MoveTrack(moveTrack);
+                                }
+                                
+                                break;
+                            }
+                        default:
+                            {
+                                //more than 1
+                                MessageUserControl.ShowInfo("Track Movement", "You must select only one song to remove.");
+                                break;
+                            }
+                    }
+                }
+            }
 
         }
 
         protected void MoveUp_Click(object sender, EventArgs e)
         {
             //code to go here
+            if (string.IsNullOrEmpty(PlaylistName.Text))
+            {
+                MessageUserControl.ShowInfo("Missing Data", "Enter a playlist name");
+            }
+            else
+            {
+                if (PlayList.Rows.Count == 0)
+                {
+                    MessageUserControl.ShowInfo("Track Movement", "You must have a play list visible to choose tracks for movement. Select fromt he displayed playlist.");
+                }
+                else
+                {
+                    MoveTrackItem moveTrack = new MoveTrackItem();
+                    int rowsSelected = 0;
+                    CheckBox trackSelection = null;
+                    //traverse the gridview control PlayList
+                    //you could do this same code using a foreach()
+                    for (int i = 0; i < PlayList.Rows.Count; i++)
+                    {
+                        //point to the checkbox control on the gridview row
+                        trackSelection = PlayList.Rows[i].FindControl("Selected") as CheckBox;
+                        //test the setting of the checkbox
+                        if (trackSelection.Checked)
+                        {
+                            rowsSelected++;
+                            moveTrack.TrackID = int.Parse((trackSelection.FindControl("TrackId") as Label).Text);
+                            moveTrack.TrackNumber = int.Parse((trackSelection.FindControl("TrackNumber") as Label).Text);
+                        }
+                    }
+
+                    //was a single song selected?
+                    switch (rowsSelected)
+                    {
+                        case 0:
+                            {
+                                MessageUserControl.ShowInfo("Track Movement", "You must select one song to remove.");
+                                break;
+                            }
+                        case 1:
+                            {
+                                //rule: do not move if last song
+                                if (moveTrack.TrackNumber == 1)
+                                {
+                                    MessageUserControl.ShowInfo("Track Movement", "Song selected is already the first song. Moving up not necessary.");
+                                }
+                                else
+                                {
+                                    moveTrack.Direction = "up";
+                                    MoveTrack(moveTrack);
+                                }
+
+                                break;
+                            }
+                        default:
+                            {
+                                //more than 1
+                                MessageUserControl.ShowInfo("Track Movement", "You must select only one song to move.");
+                                break;
+                            }
+                    }
+                }
+            }
 
         }
 
-        protected void MoveTrack(int trackid, int tracknumber, string direction)
+        protected void MoveTrack(MoveTrackItem movetrack)
         {
-            //call BLL to move track
+            string username = "HansenB";  //until security is implemented
+            movetrack.UserName = username;
+            movetrack.PlaylistName = PlaylistName.Text;
+
+            MessageUserControl.TryRun(() =>
+            {
+                PlaylistTracksController sysmgr = new PlaylistTracksController();
+                sysmgr.MoveTrack(movetrack);
+                RefreshPlayList(sysmgr,username);
+
+            }, "Track Movement", "Track has been moved.");
 
         }
 

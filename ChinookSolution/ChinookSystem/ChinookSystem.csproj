@@ -82,6 +82,7 @@
     <Compile Include="ViewModels\CustomersOfCountryEmail.cs" />
     <Compile Include="ViewModels\CustomerSupportItem.cs" />
     <Compile Include="ViewModels\EmployeeCustomerList.cs" />
+    <Compile Include="ViewModels\MoveTrackItem.cs" />
     <Compile Include="ViewModels\SelectionList.cs" />
     <Compile Include="ViewModels\TrackList.cs" />
     <Compile Include="ViewModels\UserPlaylistTrack.cs" />
