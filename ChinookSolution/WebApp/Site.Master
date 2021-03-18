@@ -11,9 +11,10 @@
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
-    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link href="css/font-awesome.css" rel="stylesheet" />
+    <link href="Content/myTabStyles.css" rel="stylesheet" />
 
 </head>
 <body>
@@ -76,89 +77,87 @@
 
         <%-- replace Bootstrap 4 menu --%>
         <div class="container">
-      <div class="navbar navbar-inverse">
-          <nav class="navbar navbar-expand-md navbar-light fixed-top">
-              <a class="navbar-brand" href="Default.aspx" runat="server">
+            <div class="navbar navbar-inverse">
+                <nav class="navbar navbar-expand-md navbar-light fixed-top">
+                    <a class="navbar-brand" href="Default.aspx" runat="server">
                         <strong>Bootstrap 4+</strong>
-              </a>
-              <button class="navbar-toggler" type="button"
+                    </a>
+                    <button class="navbar-toggler" type="button"
                         data-toggle="collapse" data-target="#navbarMenuName"
                         aria-controls="navbarMenuName" aria-expanded="false"
                         aria-label="Toggle Navigation">
-               <span class="navbar-toggler-icon"></span>
-               </button>
-               <div class="collapse navbar-collapse" id="navbarMenuName">
-                  <ul class="navbar-nav">
-                      <li class="nav-item">
-                          <a class="nav-link" href="~/Default.aspx"
-                                    style="color:black" runat="server">Home</a>
-                       </li>
-                       <li class="nav-item dropdown">
-                           <a class="nav-link dropdown-toggle" href="#"
-                                    id="navbarSubMenu" data-toggle="dropdown" 
-                                    runat="server" style="color:black"
-                                    aria-haspopup="true" aria-expanded="false"> 
-                                Samples</a>
-                            <div class="dropdown-menu" aria-labelledby="navbarSubMenu">
-                                <a class="dropdown-item"
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarMenuName">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="~/Default.aspx"
+                                    style="color: black" runat="server">Home</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#"
+                                    id="navbarSubMenu" data-toggle="dropdown"
+                                    runat="server" style="color: black"
+                                    aria-haspopup="true" aria-expanded="false">Samples</a>
+                                <div class="dropdown-menu" aria-labelledby="navbarSubMenu">
+                                    <a class="dropdown-item"
                                         href="~/SamplePages/TestPage.aspx"
-                                        style="color:black" runat="server">
-                                   Test Page</a>
-                                 <a class="dropdown-item"
+                                        style="color: black" runat="server">Test Page</a>
+                                    <a class="dropdown-item"
                                         href="~/SamplePages/ArtistAlbums.aspx"
-                                        style="color:black" runat="server">
-                                   List All Artist Albums</a>
-                                 <a class="dropdown-item"
+                                        style="color: black" runat="server">List All Artist Albums</a>
+                                    <a class="dropdown-item"
                                         href="~/SamplePages/SearchByDDL.aspx"
-                                        style="color:black" runat="server">
-                                   Filter Search Demo</a>
-                                                                 <a class="dropdown-item"
+                                        style="color: black" runat="server">Filter Search Demo</a>
+                                    <a class="dropdown-item"
                                         href="~/SamplePages/ListViewODSCRUD.aspx"
-                                        style="color:black" runat="server">
-                                   ListView ODS CRUD</a>
-                                  <a class="dropdown-item"
+                                        style="color: black" runat="server">ListView ODS CRUD</a>
+                                    <a class="dropdown-item"
                                         href="~/SamplePages/ODSRepeater.aspx"
-                                        style="color:black" runat="server">
-                                   Display Nested Query Using Repeater Control</a>
-                                                               <a class="dropdown-item"
+                                        style="color: black" runat="server">Display Nested Query Using Repeater Control</a>
+                                    <a class="dropdown-item"
                                         href="~/SamplePages/ManagePlaylist.aspx"
-                                        style="color:black" runat="server">
-                                   OLTP Manage Playlist</a>
-                            </div>
-                         </li>
-                         <li class="nav-item">
-                             <a class="nav-link" href="~/Contact.aspx" runat="server"
-                                    style="color:black">Contact</a>
-                          </li>
-                          <li class="nav-item">
-                             <a class="nav-link" href="~/About.aspx" runat="server"
-                                    style="color:black">About</a>
-                           </li>
+                                        style="color: black" runat="server">OLTP Manage Playlist</a>
+                                    <a class="dropdown-item"
+                                        href="~/SamplePages/MultiViewSetup.aspx"
+                                        style="color: black" runat="server">Setting up a Multiview Control</a>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="~/Contact.aspx" runat="server"
+                                    style="color: black">Contact</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="~/About.aspx" runat="server"
+                                    style="color: black">About</a>
+                            </li>
                         </ul>
                     </div>
-                    <div style="padding-right:50px">
+                    <div style="padding-right: 50px">
                         <asp:LoginView runat="server" ViewStateMode="Disabled">
                             <AnonymousTemplate>
                                 <ul class="nav navbar-nav navbar-right">
                                     <li><a runat="server" href="~/Account/Register"
-                                              style="color:black">Register</a></li>&nbsp;&nbsp;
-                                    <li><a runat="server" href="~/Account/Login" style="color:black">Log in</a></li>
+                                        style="color: black">Register</a></li>
+                                    &nbsp;&nbsp;
+                                    <li><a runat="server" href="~/Account/Login" style="color: black">Log in</a></li>
                                 </ul>
                             </AnonymousTemplate>
                             <LoggedInTemplate>
                                 <ul class="nav navbar-nav navbar-right">
                                     <li><a runat="server" href="~/Account/Manage" title="Manage your account"
-                                            style="color:black">Hello, <%: Context.User.Identity.GetUserName()  %> !
-                                        </a></li>&nbsp;&nbsp;
+                                        style="color: black">Hello, <%: Context.User.Identity.GetUserName()  %> !
+                                    </a></li>
+                                    &nbsp;&nbsp;
                                     <li>
                                         <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off"
-                                               LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
+                                            LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
                                     </li>
                                 </ul>
                             </LoggedInTemplate>
                         </asp:LoginView>
                     </div>
-                </nav> 
+                </nav>
             </div>
         </div>
 
