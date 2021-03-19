@@ -10,6 +10,13 @@
 <div>
     <h1>Manage Playlists (UI/UX TRX Sample)</h1>
 </div>
+<div class ="row">
+    <div class="offset-10">
+        <asp:Label ID="Label2" runat="server" Text="Customer"></asp:Label>
+        <asp:Label ID="LoggedUser" runat="server"></asp:Label>
+    </div>
+</div>
+
 <div class="row">
     <div class="offset-1">
          <%--Add MessageUserControl--%>
