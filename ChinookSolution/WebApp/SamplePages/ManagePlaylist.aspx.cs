@@ -364,6 +364,7 @@ namespace WebApp.SamplePages
                     string song = (e.Item.FindControl("NameLabel") as Label).Text;
 
                     sysmgr.Add_TrackToPLaylist(PlaylistName.Text, username, int.Parse(e.CommandArgument.ToString()), song);
+
                     RefreshPlayList(sysmgr, username);
 
 
