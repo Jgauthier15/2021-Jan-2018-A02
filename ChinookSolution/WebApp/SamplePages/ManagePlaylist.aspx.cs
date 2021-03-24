@@ -8,6 +8,7 @@ using System.Web.UI.WebControls;
 #region Additonal Namespaces
 using ChinookSystem.BLL;
 using ChinookSystem.ViewModels;
+using FreeCode.Exceptions;
 
 #endregion
 
@@ -291,11 +292,15 @@ namespace WebApp.SamplePages
         protected void DeleteTrack_Click(object sender, EventArgs e)
         {
             string username = "HansenB";  //until security is implemented
+            List<Exception> brokenRules = new List<Exception>();
 
             //form event validation: presence (do i have data?)
             if (string.IsNullOrEmpty(PlaylistName.Text))
             {
-                MessageUserControl.ShowInfo("Missing Data", "Enter a playlist name");
+
+                brokenRules.Add(new BusinessRuleException<string>("Enter a playlist name", "PlayList Name","missing"));
+
+                //MessageUserControl.ShowInfo("Missing Data", "Enter a playlist name");
             }
             else
             {
@@ -333,9 +338,16 @@ namespace WebApp.SamplePages
                         //data collected, send for processing
                         MessageUserControl.TryRun(() =>
                         {
-                            PlaylistTracksController sysmgr = new PlaylistTracksController();
-                            sysmgr.DeleteTracks(username, PlaylistName.Text, trackids);
-                            RefreshPlayList(sysmgr, username);
+                            if (brokenRules.Count > 0)
+                            {
+                                throw new BusinessRuleCollectionException("Delete Track",brokenRules);
+                            }
+                            else
+                            {
+                                PlaylistTracksController sysmgr = new PlaylistTracksController();
+                                sysmgr.DeleteTracks(username, PlaylistName.Text, trackids);
+                                RefreshPlayList(sysmgr, username);
+                            }
                         }, "Track removal", "Selected track(s) have been removed from the playlist");
                     }
                 }
